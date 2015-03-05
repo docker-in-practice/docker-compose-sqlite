@@ -2,11 +2,11 @@ server:
   command: socat TCP-L:12345,fork,reuseaddr EXEC:'sqlite /opt/sqlite/db',pty
   build: .
   volumes:
-  - /tmp/sqlitedbs/live:/opt/sqlite/db
+  - /tmp/sqlitedbs/test:/opt/sqlite/db
 proxy:
-  command: socat TCP-L:12346,fork,reuseaddr TCP:server:12345
+  command: socat TCP-L:12346,fork,reuseaddr TCP:sqliteserver:12345
   build: .
   links:
-  - server:server
+  - server:sqliteserver
   ports:
   - 12346:12346
