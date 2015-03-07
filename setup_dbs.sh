@@ -7,11 +7,14 @@ then
 elif [[ $(which sqlite2) ]]
 then
 	SQLITE=sqlite2
-elif [[ $(which sqlite3) ]]
-then
-	SQLITE=sqlite3
 else
-	echo "Please install sqlite"
+	echo "Please install sqlite (version 2)"
+	exit 1
+fi
+SQLITE_VERSION=$(sqlite -version)
+if [[ ${SQLITE_VERSION:0:1} != "2" ]]
+then
+	echo "Please install sqlite version 2, not version ${SQLITE_VERSION:0:1}.x"
 	exit 1
 fi
 SQLITEDIR=/tmp/sqlitedbs
