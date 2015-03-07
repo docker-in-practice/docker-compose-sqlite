@@ -4,17 +4,17 @@ SQLITE=sqlite
 if [[ $(which sqlite) ]]
 then
 	SQLITE=sqlite
-elif [[ $(which sqlite2) ]]
+elif [[ $(which sqlite3) ]]
 then
-	SQLITE=sqlite2
+	SQLITE=sqlite3
 else
-	echo "Please install sqlite (version 2)"
+	echo "Please install sqlite (version 3)"
 	exit 1
 fi
-SQLITE_VERSION=$(sqlite -version)
-if [[ ${SQLITE_VERSION:0:1} != "2" ]]
+SQLITE_VERSION=$($SQLITE -version)
+if [[ ${SQLITE_VERSION:0:1} != "3" ]]
 then
-	echo "Please install sqlite version 2, not version ${SQLITE_VERSION:0:1}.x"
+	echo "Please install sqlite version 3, not version ${SQLITE_VERSION:0:1}.x"
 	exit 1
 fi
 SQLITEDIR=/tmp/sqlitedbs
